@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, viewport-fit=cover"
+  >
+
+  <meta name="theme-color" content="#fff7c7">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta
+    name="apple-mobile-web-app-status-bar-style"
+    content="default"
+  >
+
+  <title>ポーズでクリア</title>
+
+  <link rel="stylesheet" href="./style.css">
+
+  <!-- 読み込み順序を保つため、すべてdeferを付けます。 -->
+  <script
+    defer
+    src="https://cdn.jsdelivr.net/npm/@mediapipe/pose@0.5.1675469404/pose.js"
+  ></script>
+
+  <script
+    defer
+    src="https://cdn.jsdelivr.net/npm/@mediapipe/hands@0.4.1675469240/hands.js"
+  ></script>
+
+  <script
+    defer
+    src="https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh@0.4.1633559619/face_mesh.js"
+  ></script>
+
+  <script defer src="./app.js"></script>
+</head>
+
+<body>
+  <main class="app">
+    <header class="app-header">
+      <h1>ポーズでクリア</h1>
+      <p>カメラのまえで ポーズをとってね</p>
+    </header>
+
+    <section class="game-container" aria-label="ポーズゲーム">
+      <canvas
+        id="gameCanvas"
+        width="1200"
+        height="720"
+        aria-label="お題とカメラ映像"
+      >
+        このゲームにはCanvas対応ブラウザーが必要です。
+      </canvas>
+
+      <!--
+        iPadでインライン再生するため、playsinlineとmutedが必要です。
+        display:noneにはせず、画面外に置きます。
+      -->
+      <video
+        id="cameraVideo"
+        autoplay
+        playsinline
+        muted
+        aria-hidden="true"
+      ></video>
+    </section>
+
+    <nav class="controls" aria-label="ゲーム操作">
+      <button id="actionButton" type="button">
+        スタート！
+      </button>
+
+      <button id="backButton" class="secondary" type="button" hidden>
+        スタートがめんへ
+      </button>
+    </nav>
+
+    <p id="notice" class="notice" role="status" aria-live="polite">
+      iPadを横向きにすると遊びやすいです。
+    </p>
+
+    <p class="help">
+      顔と両肩を映して、はじめに少し止まってください。<br>
+      キーボード：Dで操作 ／ Q・Escでスタート画面へ
+    </p>
+  </main>
+</body>
+</html>
